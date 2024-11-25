@@ -1,9 +1,8 @@
 import React from 'react';
-import {Box, Container, Tabs, Link} from "@chakra-ui/react"
 import styles from "./styles.module.css"
 import {Avatar, AvatarGroup} from "@/app/shared/Components/Avatar/ui/avatar";
 import { Tag } from "@/app/shared/Components/Tag/ui/tag"
-import { Box, Container, Flex, Text, HStack } from "@chakra-ui/react";
+import { Box, Container, Flex, Text, HStack, Tabs, Link } from "@chakra-ui/react";
 
 const Home = () => {
     return (
@@ -44,13 +43,7 @@ const Home = () => {
                     </Tabs.Content>
                 </Tabs.Root>
             </Container>
-        </Box>
-    );
-};
 
-export default Home
-    return (
-        <Box>
             <Container maxW="container.lg" mt={8}>
                 {/* Заголовок таблицы */}
                 <Box fontWeight="bold" bg="gray.100" p={4} borderRadius="md">
@@ -110,4 +103,4 @@ export default Home
     );
 };
 
-export default Home;
+export default Home

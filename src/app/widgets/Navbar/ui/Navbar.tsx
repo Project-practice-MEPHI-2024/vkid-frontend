@@ -1,13 +1,13 @@
 import React from 'react';
 import {Button, Container, Flex, IconButton, Link} from "@chakra-ui/react";
 import {LuSearch} from "react-icons/lu";
-import {logo, navbar} from "./syles.module.css"
+import styles from "./styles.module.css"
 
 const Navbar = () => {
   return (
-    <Container className={navbar}>
+    <Container className={styles.navbar}>
       <Flex direction="row" justify="space-between">
-        <Link href="" className={logo}>
+        <Link href="" className={styles.logo}>
           Papaya
         </Link>
         <Flex gap={5} align="center">

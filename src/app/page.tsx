@@ -1,10 +1,11 @@
-export default function Home() {
+import Home from "@/app/pages/Home/ui/Home";
+
+const Page = () => {
   return (
-    <div>
-      <main>
-      </main>
-      <footer>
-      </footer>
-    </div>
-  );
+    <>
+      <Home/>
+    </>
+  )
 }
+
+export default Page

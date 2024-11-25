@@ -1,0 +1,13 @@
+.logo {
+    font-weight: 500;
+    font-size: 40px;
+}
+
+.navbar {
+    border-bottom: 1px solid;
+}
+.navbarButtons {
+    display: flex;
+    gap: 1rem;
+    margin: auto 0 auto 0;
+}

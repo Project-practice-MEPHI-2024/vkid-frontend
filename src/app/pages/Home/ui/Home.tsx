@@ -1,5 +1,5 @@
 import {Box, Container} from "@chakra-ui/react"
-import {Avatar, AvatarGroup} from "@/app/shared/Avatar/ui/avatar";
+import {Avatar, AvatarGroup} from "@/app/shared/Components/Avatar/ui/avatar";
 
 
 const Home = () => {

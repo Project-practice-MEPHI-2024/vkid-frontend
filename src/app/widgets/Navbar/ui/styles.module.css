@@ -6,6 +6,7 @@
 .navbar {
     border-bottom: 1px solid;
 }
+
 .navbarButtons {
     display: flex;
     gap: 1rem;

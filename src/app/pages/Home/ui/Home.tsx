@@ -1,10 +1,49 @@
+import React from 'react';
+import styles from "./styles.module.css"
 import {Avatar, AvatarGroup} from "@/app/shared/Components/Avatar/ui/avatar";
 import { Tag } from "@/app/shared/Components/Tag/ui/tag"
-import { Box, Container, Flex, Text, HStack } from "@chakra-ui/react";
+import { Box, Container, Flex, Text, HStack, Tabs, Link } from "@chakra-ui/react";
 
 const Home = () => {
     return (
         <Box>
+            <Container className={styles.buttns}>
+                <Tabs.Root defaultValue="latest">
+
+                    <Tabs.List className={styles.tabs_list}>
+                        <Tabs.Trigger className={styles.tabs_trigger} value="latest" asChild >
+                            <Link href={"#latest"}>
+                                latest
+                            </Link>
+                        </Tabs.Trigger>
+
+                        <Tabs.Trigger className={styles.tabs_trigger} value="categories" asChild>
+                            <Link href={"#categories"}>
+                                categories
+                            </Link>
+                        </Tabs.Trigger>
+
+                        <Tabs.Trigger className={styles.tabs_trigger} value="tags" asChild>
+                            <Link href={"#tags"}>
+                                tags
+                            </Link>
+                        </Tabs.Trigger>
+                    </Tabs.List>
+
+                    <Tabs.Content value="latest">
+                        latest
+                    </Tabs.Content>
+
+                    <Tabs.Content  value="categories">
+                        categories
+                    </Tabs.Content>
+
+                    <Tabs.Content  value="tags">
+                        tags
+                    </Tabs.Content>
+                </Tabs.Root>
+            </Container>
+
             <Container maxW="container.lg" mt={8}>
                 {/* Заголовок таблицы */}
                 <Box fontWeight="bold" bg="gray.100" p={4} borderRadius="md">
@@ -64,4 +103,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default Home

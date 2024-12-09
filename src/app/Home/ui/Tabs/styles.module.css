@@ -1,8 +1,3 @@
-.buttns {
-    display: flex;
-    margin-top: 2rem;
-}
-
 .tabs_list {
     display: flex;
     gap: 1.5rem;
@@ -11,7 +6,6 @@
 }
 
 .tabs_trigger {
-    font-family: 'Georgia', serif;
     font-size: 1rem;
     color: #000;
     text-decoration: none;

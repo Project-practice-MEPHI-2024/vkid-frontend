@@ -4,7 +4,10 @@
 }
 
 .navbar {
+    position: sticky;
     border-bottom: 1px solid;
+    z-index: 100;
+    background-color: white;
 }
 
 .navbarButtons {

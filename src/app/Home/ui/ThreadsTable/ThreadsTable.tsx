@@ -4,7 +4,7 @@ import React, {useEffect} from 'react';
 import {Tag} from '@/shared/Components/Tag/ui/tag';
 import {useRouter} from 'next/navigation';
 import {useGetThreads} from '@/entities/thread/queries/useGetThreads';
-import {Table} from '@chakra-ui/react';
+import {Box, Table} from '@chakra-ui/react';
 import {useThreadStore} from '@/entities/thread/stores/threadStore';
 
 const ThreadsTable = () => {
@@ -44,12 +44,14 @@ const ThreadsTable = () => {
         {threads?.map(thread => (
           <Table.Row onClick={() => handleClick(thread.ID)} key={thread.ID}>
             <Table.Cell>{thread.title}</Table.Cell>
-            <Table.Cell textAlign="end">
-              {thread.categories.map(categorie => (
-                <Tag key={categorie} colorScheme="purple">
-                  {categorie}
-                </Tag>
-              ))}
+            <Table.Cell>
+              <Box gap="2" display="flex" justifyContent="flex-end">
+                {thread.categories.map(categorie => (
+                  <Tag key={categorie} colorScheme="purple">
+                    {categorie}
+                  </Tag>
+                ))}
+              </Box>
             </Table.Cell>
           </Table.Row>
         ))}

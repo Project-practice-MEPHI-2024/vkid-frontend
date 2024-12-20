@@ -8,3 +8,12 @@ export interface GetPostsResponse {
   error?: string;
   posts: Post[];
 }
+
+export interface CreatePostRequest {
+  content: string;
+  thread_id: string;
+}
+
+export interface CreatePostResponse {
+  error?: string;
+}

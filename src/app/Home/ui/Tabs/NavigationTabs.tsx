@@ -9,15 +9,25 @@ import {
   Input,
   Tag,
   Flex,
-  Alert,
-  AlertTitle,
-  Box,
 } from '@chakra-ui/react';
 import ThreadsTable from '@/app/Home/ui/ThreadsTable/ThreadsTable';
 import {useValidate} from '@/entities/user/queries/useValidate';
 import {RxCross2} from 'react-icons/rx';
 import {CreateThreadRequest} from '@/entities/thread';
 import {usePostThread} from '@/entities/thread/queries/usePostThread';
+import {FaPlus} from 'react-icons/fa';
+import {
+  DrawerActionTrigger,
+  DrawerBackdrop,
+  DrawerBody,
+  DrawerCloseTrigger,
+  DrawerContent,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerRoot,
+  DrawerTitle,
+  DrawerTrigger,
+} from '@/shared/Components/Drawer/ui/drawer';
 
 const NavigationTabs = () => {
   const isAuthenticated = useValidate();
@@ -66,11 +76,20 @@ const NavigationTabs = () => {
       </Tabs.List>
 
       <Tabs.Content value="threads">
-        {isAuthenticated ? (
-          <Card.Root width="40%" marginBottom="1.5em">
-            <Card.Body gap="2">
-              <Card.Title mt="2">Enter a Thread</Card.Title>
-              <Card.Description>
+        {isAuthenticated && (
+          <DrawerRoot placement={'bottom'}>
+            <DrawerBackdrop />
+            <DrawerTrigger asChild>
+              <Button variant="outline" size="sm" margin="1.5em 0 1.5em 0">
+                <FaPlus />
+                Create new thread
+              </Button>
+            </DrawerTrigger>
+            <DrawerContent roundedTop={'l3'}>
+              <DrawerHeader>
+                <DrawerTitle>Enter a Thread</DrawerTitle>
+              </DrawerHeader>
+              <DrawerBody>
                 <Textarea
                   placeholder="Your important text"
                   name="title"
@@ -90,18 +109,23 @@ const NavigationTabs = () => {
                   ))}
                 </Flex>
                 <Input
-                  placeholder="Enter a category"
+                  placeholder="Enter some categories"
                   onKeyDown={handleCategoryKeyDown}
                 />
-              </Card.Description>
-            </Card.Body>
-            <Card.Footer justifyContent="flex-end">
-              <Button variant="outline">Clear</Button>
-              <Button onClick={() => createThread(threadForm)}>Post</Button>
-            </Card.Footer>
-          </Card.Root>
-        ) : (
-          ''
+              </DrawerBody>
+              <DrawerFooter>
+                <DrawerActionTrigger asChild>
+                  <Button variant="outline">Cancel</Button>
+                </DrawerActionTrigger>
+                <DrawerActionTrigger asChild>
+                  <Button onClick={() => createThread(threadForm)}>
+                    Publish
+                  </Button>
+                </DrawerActionTrigger>
+              </DrawerFooter>
+              <DrawerCloseTrigger />
+            </DrawerContent>
+          </DrawerRoot>
         )}
         <ThreadsTable />
       </Tabs.Content>

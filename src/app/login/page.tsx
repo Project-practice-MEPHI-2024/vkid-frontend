@@ -44,9 +44,9 @@ const Login = () => {
     <Box className={styles.cardContainer}>
       <Card.Root maxW="sm">
         <Card.Header>
-          <Card.Title>Sign up</Card.Title>
+          <Card.Title>Log in</Card.Title>
           <Card.Description>
-            Fill in the form below to create an account
+            Fill in the form below to log in an account
           </Card.Description>
         </Card.Header>
         <Card.Body>

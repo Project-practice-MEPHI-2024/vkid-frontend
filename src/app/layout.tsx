@@ -5,6 +5,7 @@ import {Box, ChakraProvider, defaultSystem} from '@chakra-ui/react';
 import Navbar from '@/widgets/Navbar/ui/Navbar';
 import {QueryClient} from '@tanstack/query-core';
 import {QueryClientProvider} from '@tanstack/react-query';
+import Footer from '@/widgets/Footer/ui/Footer';
 
 export default function RootLayout({
   children,
@@ -18,8 +19,11 @@ export default function RootLayout({
       <body>
         <QueryClientProvider client={queryClient}>
           <ChakraProvider value={defaultSystem}>
-            <Navbar />
-            <Box>{children}</Box>
+            <Box style={{minHeight: 'calc(100vh - 60px)'}}>
+              <Navbar />
+              <Box scroll="auto">{children}</Box>
+            </Box>
+            <Footer />
           </ChakraProvider>
         </QueryClientProvider>
       </body>

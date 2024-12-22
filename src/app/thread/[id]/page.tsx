@@ -9,8 +9,8 @@ import {
   Link,
   Button,
   Textarea,
-  Flex,
-  Input,
+  Collapsible,
+  Text,
 } from '@chakra-ui/react';
 import getFormattedDate from '@/shared/utils/getFormattedDate';
 import {Tag} from '@/shared/Components/Tag/ui/tag';
@@ -35,6 +35,7 @@ import {
 import {FaPlus} from 'react-icons/fa';
 import {useCreatePost} from '@/entities/post/queries/useCreatePost';
 import {CreatePostRequest} from '@/entities/post/types/postTypes';
+import Post from '@/app/thread/post/post';
 
 const ThreadPage = ({params}: {params: {id: string}}) => {
   const thread = useThreadStore(state => state.threads).find(
@@ -52,7 +53,7 @@ const ThreadPage = ({params}: {params: {id: string}}) => {
 
   useEffect(() => {
     fetchPosts(1, 10);
-  }, []);
+  }, [success]);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {name, value} = e.target;
     setPostForm(prev => ({...prev, [name]: value}));
@@ -126,17 +127,10 @@ const ThreadPage = ({params}: {params: {id: string}}) => {
         </Card.Body>
       </Card.Root>
       {posts.length > 0 ? (
-        <Box>
+        <Box marginBottom="2rem">
           <Separator margin="2em 0 2em 0" />
           {posts.map(post => (
-            <Card.Root marginTop="2em" key={post.ID}>
-              <Card.Body gap="2">
-                <Card.Description mt="2">{post.content}</Card.Description>
-                <Card.Description mt="2" fontFamily="Faculty Glyphic">
-                  {getFormattedDate(post.CreatedAt)}
-                </Card.Description>
-              </Card.Body>
-            </Card.Root>
+            <Post key={post.ID} post={post} />
           ))}
         </Box>
       ) : (

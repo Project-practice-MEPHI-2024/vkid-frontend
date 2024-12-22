@@ -1,20 +1,21 @@
 'use client';
 
-import React, {useEffect} from 'react';
+import React, {FC, useEffect} from 'react';
 import {Tag} from '@/shared/Components/Tag/ui/tag';
 import {useRouter} from 'next/navigation';
 import {useGetThreads} from '@/entities/thread/queries/useGetThreads';
 import {Box, Table} from '@chakra-ui/react';
 import {useThreadStore} from '@/entities/thread/stores/threadStore';
+import {Thread} from '@/entities/thread';
 
-const ThreadsTable = () => {
-  const {threads, loaded, error, fetchThreads} = useGetThreads();
-  const setThreads = useThreadStore(state => state.setThreads);
+type Props = {
+  threads: Thread[];
+  loaded: boolean;
+  error: string | null;
+  setThreads: (threads: Thread[]) => void;
+};
+const ThreadsTable: FC<Props> = ({threads, loaded, error, setThreads}) => {
   const router = useRouter();
-
-  useEffect(() => {
-    fetchThreads(1, 10);
-  }, []);
 
   if (loaded) {
     return <p>Loading...</p>;
@@ -27,6 +28,10 @@ const ThreadsTable = () => {
     router.push(`/thread/${threadId}`);
     setThreads(threads);
   };
+
+  if (threads.length == 0) {
+    return <></>;
+  }
 
   return (
     <Table.Root

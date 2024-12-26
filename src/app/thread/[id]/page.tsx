@@ -9,8 +9,6 @@ import {
   Link,
   Button,
   Textarea,
-  Collapsible,
-  Text,
 } from '@chakra-ui/react';
 import getFormattedDate from '@/shared/utils/getFormattedDate';
 import {Tag} from '@/shared/Components/Tag/ui/tag';

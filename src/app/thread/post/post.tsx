@@ -43,6 +43,7 @@ const Post: FC<Props> = ({post}) => {
   });
   const {createComment, success} = useCreateComment();
   const {comments, fetchComments} = useGetCommentsWithPostId();
+  const [opened, setOpened] = useState<boolean>(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {name, value} = e.target;
@@ -61,10 +62,12 @@ const Post: FC<Props> = ({post}) => {
           {getFormattedDate(post.CreatedAt)}
         </Card.Description>
         <Card.Footer padding="0">
-          <Collapsible.Root width="100%">
+          <Collapsible.Root
+            width="100%"
+            onOpenChange={() => setOpened(!opened)}>
             <Collapsible.Trigger>
               <Button variant="outline" margin="1.5rem 0 1.5rem 0">
-                View comments
+                {opened ? 'Close' : 'View comments'}
               </Button>
             </Collapsible.Trigger>
             <Collapsible.Content>

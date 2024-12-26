@@ -51,7 +51,7 @@ const Post: FC<Props> = ({post}) => {
   };
 
   useEffect(() => {
-    fetchComments(post.ID, 1, 10);
+    fetchComments(post.ID, 1, 100);
   }, [success]);
 
   return (

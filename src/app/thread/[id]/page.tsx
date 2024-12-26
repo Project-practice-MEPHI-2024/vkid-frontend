@@ -50,7 +50,7 @@ const ThreadPage = ({params}: {params: {id: string}}) => {
   const {createPost, success} = useCreatePost();
 
   useEffect(() => {
-    fetchPosts(1, 10);
+    fetchPosts(1, 100);
   }, [success]);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {name, value} = e.target;

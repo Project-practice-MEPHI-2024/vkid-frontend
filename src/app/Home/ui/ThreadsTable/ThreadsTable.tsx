@@ -1,11 +1,9 @@
 'use client';
 
-import React, {FC, useEffect} from 'react';
+import React, {FC} from 'react';
 import {Tag} from '@/shared/Components/Tag/ui/tag';
 import {useRouter} from 'next/navigation';
-import {useGetThreads} from '@/entities/thread/queries/useGetThreads';
 import {Box, Table} from '@chakra-ui/react';
-import {useThreadStore} from '@/entities/thread/stores/threadStore';
 import {Thread} from '@/entities/thread';
 
 type Props = {

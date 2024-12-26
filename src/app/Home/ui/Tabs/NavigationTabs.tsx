@@ -43,7 +43,7 @@ const NavigationTabs = () => {
   const {createThread, success} = usePostThread();
 
   useEffect(() => {
-    fetchThreads(1, 10);
+    fetchThreads(1, 100);
   }, [success]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import {
   Button,
   Card,
@@ -6,6 +6,7 @@ import {
   Separator,
   Text,
   Textarea,
+  Flex
 } from '@chakra-ui/react';
 import getFormattedDate from '@/shared/utils/getFormattedDate';
 import {
@@ -13,12 +14,12 @@ import {
   TimelineContent,
   TimelineDescription,
   TimelineItem,
-  TimelineRoot,
+  TimelineRoot
 } from '@/shared/Components/Timeline/ui/timeline';
-import {Post} from '@/entities/post/types/postTypes';
-import {useGetCommentsWithPostId} from '@/entities/comment/queries/useGetCommentsWithPostId';
-import {CreateCommentRequest} from '@/entities/comment/types/commentTypes';
-import {useCreateComment} from '@/entities/comment/queries/useCreateComment';
+import { Post as PostType } from '@/entities/post/types/postTypes';
+import { useGetCommentsWithPostId } from '@/entities/comment/queries/useGetCommentsWithPostId';
+import { CreateCommentRequest } from '@/entities/comment/types/commentTypes';
+import { useCreateComment } from '@/entities/comment/queries/useCreateComment';
 import {
   DrawerActionTrigger,
   DrawerBackdrop,
@@ -29,30 +30,33 @@ import {
   DrawerHeader,
   DrawerRoot,
   DrawerTitle,
-  DrawerTrigger,
+  DrawerTrigger
 } from '@/shared/Components/Drawer/ui/drawer';
-import {FaPlus} from 'react-icons/fa';
+import { FaPlus } from 'react-icons/fa';
+
+import LikeButton from '@/shared/components/LikeButton';
 
 type Props = {
-  post: Post;
+  post: PostType;
 };
-const Post: FC<Props> = ({post}) => {
+
+const Post: FC<Props> = ({ post }) => {
   const [commentForm, setCommentForm] = useState<CreateCommentRequest>({
     content: '',
-    post_id: post.ID,
+    post_id: post.ID
   });
-  const {createComment, success} = useCreateComment();
-  const {comments, fetchComments} = useGetCommentsWithPostId();
+  const { createComment, success } = useCreateComment();
+  const { comments, fetchComments } = useGetCommentsWithPostId();
   const [opened, setOpened] = useState<boolean>(false);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const {name, value} = e.target;
-    setCommentForm(prev => ({...prev, [name]: value}));
-  };
 
   useEffect(() => {
     fetchComments(post.ID, 1, 100);
   }, [success]);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setCommentForm(prev => ({ ...prev, [name]: value }));
+  };
 
   return (
     <Card.Root marginTop="2em" key={post.ID}>
@@ -61,17 +65,23 @@ const Post: FC<Props> = ({post}) => {
         <Card.Description mt="2" fontFamily="Faculty Glyphic">
           {getFormattedDate(post.CreatedAt)}
         </Card.Description>
+        <Flex align="center" mt="1">
+          <LikeButton targetId={post.ID} initialLiked={false} />
+        </Flex>
         <Card.Footer padding="0">
           <Collapsible.Root
             width="100%"
-            onOpenChange={() => setOpened(!opened)}>
+            onOpenChange={() => setOpened(!opened)}
+          >
             <Collapsible.Trigger>
               <Button variant="outline" margin="1.5rem 0 1.5rem 0">
                 {opened ? 'Close' : 'View comments'}
               </Button>
             </Collapsible.Trigger>
+
             <Collapsible.Content>
               <Separator margin="1em 0 1em 0" />
+
               <TimelineRoot>
                 <DrawerRoot placement={'bottom'}>
                   <DrawerBackdrop />
@@ -79,8 +89,9 @@ const Post: FC<Props> = ({post}) => {
                     <Button
                       variant="outline"
                       size="sm"
-                      margin="1.5em 0 1.5em 0">
-                      <FaPlus />
+                      margin="1.5em 0 1.5em 0"
+                    >
+                      <FaPlus style={{ marginRight: '0.5rem' }} />
                       Write a comment
                     </Button>
                   </DrawerTrigger>
@@ -116,7 +127,13 @@ const Post: FC<Props> = ({post}) => {
                       <TimelineDescription fontFamily="Faculty Glyphic">
                         {getFormattedDate(comment.CreatedAt)}
                       </TimelineDescription>
-                      <Text textStyle="sm">{comment.content}</Text>
+                      <Flex align="center" mt="1">
+                        <Text textStyle="sm">{comment.content}</Text>
+                        <LikeButton
+                          targetId={comment.ID}
+                          initialLiked={false}
+                        />
+                      </Flex>
                     </TimelineContent>
                   </TimelineItem>
                 ))}
